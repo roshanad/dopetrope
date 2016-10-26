@@ -42,46 +42,88 @@
  * @see html.html.twig
  */
 #}
-<div class="layout-container">
+<!-- Header Wrapper -->
+<div id="header-wrapper">
+    <div class="container">
+        {% if page.header %}
+            <div class="row">
+                {{ page.header }}
+            </div>
+        {% endif %}
 
-  <header role="banner">
-    {{ page.header }}
-  </header>
+        {% if page.banner %}
+            <div class="row">
+                {{ page.banner }}
+            </div>
+        {% endif %}
 
-  {{ page.primary_menu }}
-  {{ page.secondary_menu }}
+        {% if page.intro %}
+            <div class="row">
+                {{ page.intro }}
+            </div>
+        {% endif %}
 
-  {{ page.breadcrumb }}
+        {% if page.header_bottom %}
+            <div class="row">
+                {{ page.header_bottom }}
+            </div>
+        {% endif %}
+    </div>
+</div>
 
-  {{ page.highlighted }}
+<!-- Main Wrapper -->
+<div id="main-wrapper">
+    <div class="container">
+        {% if page.content and page.sidebar %}
+            <div class="row">
+                <div class="main col-md-8">
+                    {{ page.content }}
+                </div>
+                <div class="sidebar col-md-4">
+                    {{ page.sidebar }}
+                </div>
+            </div>
+        {% elseif page.content %}
+            <div class="row">
+                <div class="main col-xs-12">
+                    {{ page.content }}
+                </div>
+            </div>
+        {% elseif page.sidebar %}
+            <div class="row">
+                <div class="main col-xs-12">
+                    {{ page.sidebar }}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
 
-  {{ page.help }}
-
-  <main role="main">
-    <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
-
-    <div class="layout-content">
-      {{ page.content }}
-    </div>{# /.layout-content #}
-
-    {% if page.sidebar_first %}
-      <aside class="layout-sidebar-first" role="complementary">
-        {{ page.sidebar_first }}
-      </aside>
-    {% endif %}
-
-    {% if page.sidebar_second %}
-      <aside class="layout-sidebar-second" role="complementary">
-        {{ page.sidebar_second }}
-      </aside>
-    {% endif %}
-
-  </main>
-
-  {% if page.footer %}
-    <footer role="contentinfo">
-      {{ page.footer }}
-    </footer>
-  {% endif %}
-
-</div>{# /.layout-container #}
+<!-- Footer Wrapper -->
+<div id="footer-wrapper">
+    <div class="container">
+        {% if page.footer_first and page.footer_second %}
+            <div id="footer" class="row">
+                <div class="col-md-8">
+                    {{ page.footer_first }}
+                </div>
+                <div class="col-md-4">
+                    {{ page.footer_second }}
+                </div>
+            </div>
+        {% elseif page.footer_first %}
+            <div id="footer" class="row">
+                {{ page.footer_first }}
+            </div>
+        {% elseif page.footer_second %}
+            <div id="footer" class="row">
+                {{ page.footer_second }}
+            </div>
+        {% endif %} 
+        {% if page.footer_bottom %}
+            <div class="row">
+                {{ page.footer_bottom }}
+            </div>
+        {% endif %}
+    </div>
+</div>
